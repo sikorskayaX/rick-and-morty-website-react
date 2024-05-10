@@ -1,16 +1,12 @@
 ﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {FilterInput} from './filters/FilterInput';
+import {FilterSelect} from './filters/FilterSelect';
 
 export const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [displayedCharacters, setDisplayedCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
-    name: '',
-    species: '',
-    gender: '',
-    status: '',
-  });
 
   useEffect(() => {
     const loadCharacters = async (page = 1) => {
@@ -39,25 +35,6 @@ export const Characters = () => {
     setDisplayedCharacters(characters.slice(0, displayedCharacters.length + 8));
   };
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters(prevFilters => ({ ...prevFilters, [name]: value }));
-  };
-
-  useEffect(() => {
-    applyFilters();
-  }, [filters, characters]);
-
-  const applyFilters = () => {
-    const filteredCharacters = characters.filter(character => {
-      return (!filters.name || character.name.toLowerCase().includes(filters.name.toLowerCase())) &&
-             (!filters.species || character.species === filters.species) &&
-             (!filters.gender || character.gender === filters.gender) &&
-             (!filters.status || character.status === filters.status);
-    });
-
-    setDisplayedCharacters(filteredCharacters.slice(0, 8));
-  };
 
   const createCharacterElement = (character) => (
     <a key={character.id} className="characters__container" href="../pages/character-details.html" onClick={() => localStorage.setItem('selectedCharacterId', character.id)}>
@@ -73,16 +50,10 @@ export const Characters = () => {
 
   return (
     <div>
-      <input type="text" name="name" placeholder="Filter by name" onChange={handleFilterChange} />
-      <select name="species" onChange={handleFilterChange}>
-        {/* Add species options here */}
-      </select>
-      <select name="gender" onChange={handleFilterChange}>
-        {/* Add gender options here */}
-      </select>
-      <select name="status" onChange={handleFilterChange}>
-        {/* Add status options here */}
-      </select>
+      <FilterInput characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
+      <FilterSelect name="species" characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
+      <FilterSelect name="gender" characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
+      <FilterSelect name="status" characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
       <div id="characters">
         {displayedCharacters.map(createCharacterElement)}
       </div>
