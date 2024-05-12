@@ -1,63 +1,44 @@
-﻿import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {FilterInput} from './filters/FilterInput';
-import {FilterSelect} from './filters/FilterSelect';
+﻿import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllCharacters } from './charactersReducer';
 
-export const Characters = () => {
-  const [characters, setCharacters] = useState([]);
-  const [displayedCharacters, setDisplayedCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Characters = () => {
+  const dispatch = useDispatch();
+  const { characters, loading, error } = useSelector((state) => state.characters);
+  const [currentPage, setCurrentPage] = useState(1);
+  const charactersPerPage = 8;
 
   useEffect(() => {
-    const loadCharacters = async (page = 1) => {
-      try {
-        const response = await axios.get(`https://rickandmortyapi.com/api/character?page=${page}`);
-        setCharacters(prevCharacters => [...prevCharacters, ...response.data.results]);
-        const nextPage = page + 1;
-        const totalPages = response.data.info.pages;
+    dispatch(fetchAllCharacters());
+  }, [dispatch]);
 
-        if (nextPage <= totalPages) {
-          loadCharacters(nextPage);
-        } else {
-          setLoading(false);
-          setDisplayedCharacters(prevCharacters => [...prevCharacters, ...response.data.results].slice(0, 8));
-        }
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    };
-
-    loadCharacters();
-  }, []);
-
-  const handleLoadMore = () => {
-    setDisplayedCharacters(characters.slice(0, displayedCharacters.length + 8));
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
   };
 
+  // Вычисляем индексы для текущей страницы
+  const indexOfLastCharacter = currentPage * charactersPerPage;
+  const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+  const currentCharacters = characters.slice(indexOfFirstCharacter, indexOfLastCharacter);
 
-  const createCharacterElement = (character) => (
-    <a key={character.id} className="characters__container" href="../pages/character-details.html" onClick={() => localStorage.setItem('selectedCharacterId', character.id)}>
-      <img className="characters__image" src={character.image} alt={character.name} />
-      <h6 className="characters__name">{character.name}</h6>
-      <p className="characters__species regular">{character.species}</p>
-    </a>
-  );
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      <FilterInput characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
-      <FilterSelect name="species" characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
-      <FilterSelect name="gender" characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
-      <FilterSelect name="status" characters={characters} setDisplayedCharacters={setDisplayedCharacters} />
-      <div id="characters">
-        {displayedCharacters.map(createCharacterElement)}
+      <div>
+        {currentCharacters.map((character) => (
+          <div key={character.id}>
+            <img src={character.image} alt={character.name} />
+            <h3>{character.name}</h3>
+          </div>
+        ))}
       </div>
-      <button id="load" onClick={handleLoadMore}>Load More</button>
+      {indexOfLastCharacter < characters.length && (
+        <button onClick={handleNextPage}>Load More</button>
+      )}
     </div>
   );
 };
+
+export default Characters;

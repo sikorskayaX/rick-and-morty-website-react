@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes, Link } from "react-router-dom";
-import {Characters} from './components/Characters';
+import Characters from './components/Characters';
 import {Locations} from './components/Locations';
 import {Episodes} from './components/Episodes';
 
