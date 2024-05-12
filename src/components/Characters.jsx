@@ -12,32 +12,33 @@ const Characters = () => {
     dispatch(fetchAllCharacters());
   }, [dispatch]);
 
-  const handleNextPage = () => {
+  const showCharacters = () => {
     setCurrentPage(currentPage + 1);
   };
 
   // Вычисляем индексы для текущей страницы
   const indexOfLastCharacter = currentPage * charactersPerPage;
-  const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-  const currentCharacters = characters.slice(indexOfFirstCharacter, indexOfLastCharacter);
+  const currentCharacters = characters.slice(0, indexOfLastCharacter);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <div>
+    <main>
+      <div className='characters'>
         {currentCharacters.map((character) => (
-          <div key={character.id}>
-            <img src={character.image} alt={character.name} />
-            <h3>{character.name}</h3>
+          <div className='characters__container'>
+            <div key={character.id}>
+              <img className ="characters__image" src={character.image} alt={character.name} />
+              <h6 className="characters__name">{character.name}</h6>
+            </div>
           </div>
         ))}
       </div>
       {indexOfLastCharacter < characters.length && (
-        <button onClick={handleNextPage}>Load More</button>
+        <button onClick={showCharacters}>Load More</button>
       )}
-    </div>
+    </main>
   );
 };
 
