@@ -16,7 +16,9 @@ const CharacterElement = () => {
     <div>
       <h1>{character.name}</h1>
       <img src={character.image} alt={character.name} />
+      <div>{character.episode}</div>
     </div>
+    
   );
 };
 

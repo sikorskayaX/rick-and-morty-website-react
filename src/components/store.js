@@ -2,10 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit'; 
 import { thunk } from 'redux-thunk'; 
 import charactersReducer from './charactersReducer';
+import locationsReducer from './locationsReducer';
+import episodesReducer from './episodesReducer';
 
 const rootReducer = combineReducers({
   characters: charactersReducer,
-  // Other reducers can be added here
+  locations: locationsReducer,
+  episodes:episodesReducer
 });
 
 // Updated the way to pass middleware to configureStore

@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCharacters } from './charactersReducer';
-import { Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Characters = () => {
   const dispatch = useDispatch();
@@ -28,9 +28,9 @@ const Characters = () => {
     <main>
       <div className='characters'>
         {currentCharacters.map((character) => (
-          <div className='characters__container'>
-            <Link to={`characters/${character.id}`}>
-            <div key={character.id}>
+          <div className='characters__container' key={character.id}>
+            <Link to={`/characters/${character.id}`}>
+            <div >
               <img className ="characters__image" src={character.image} alt={character.name} />
               <h6 className="characters__name">{character.name}</h6>
             </div>
