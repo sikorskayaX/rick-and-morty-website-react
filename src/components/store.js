@@ -1,10 +1,10 @@
 ﻿import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit'; 
 import { thunk } from 'redux-thunk'; 
-import entitiesReducer from './entitiesReducer';
+import charactersReducer from './charactersReducer';
 
 const rootReducer = combineReducers({
-  entities: entitiesReducer,
+  characters: charactersReducer,
   // Other reducers can be added here
 });
 
