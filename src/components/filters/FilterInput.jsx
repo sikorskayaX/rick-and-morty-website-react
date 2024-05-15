@@ -1,24 +1,27 @@
 ﻿import React, { useState } from 'react';
 
-export const FilterInput = ({ characters, setDisplayedCharacters }) => {
-  const [name, setName] = useState('');
+const FilterInput = ({ characters, onFilter }) => {
+  const [filter, setFilter] = useState('');
 
-  const handleFilterChange = (e) => {
-    const value = e.target.value.toLowerCase();
-    setName(value);
-    const filteredCharacters = characters.filter(character =>
-      character.name.toLowerCase().includes(value)
+  const handleFilterChange = (event) => {
+    const value = event.target.value;
+    setFilter(value);
+    const filteredCharacters = characters.filter((character) =>
+      character.name.toLowerCase().includes(value.toLowerCase())
     );
-    setDisplayedCharacters(filteredCharacters.slice(0, 8));
+    onFilter(filteredCharacters);
   };
 
   return (
-    <input
-      type="text"
-      name="name"
-      placeholder="Filter by name"
-      value={name}
-      onChange={handleFilterChange}
-    />
+    <div className="filter-input">
+      <input
+        type="text"
+        placeholder="Filter characters..."
+        value={filter}
+        onChange={handleFilterChange}
+      />
+    </div>
   );
 };
+
+export default FilterInput;
