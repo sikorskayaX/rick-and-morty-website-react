@@ -15,6 +15,7 @@ const EpisodeElement = () => {
   return (
     <div>
       <h1>{episode.name}</h1>
+      <p>{episode.d}</p>
     </div>
     
   );

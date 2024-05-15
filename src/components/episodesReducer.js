@@ -13,24 +13,29 @@ export const fetchEpisodesFail = (error) => ({ type: FETCH_EPISODES_FAIL, payloa
 export const setPage = (page) => ({ type: SET_PAGE, payload: page });
 
 // Thunk для загрузки всех персонажей
-export const fetchAllEpisodes = () => {
-    return async (dispatch) => {
-      dispatch(fetchEpisodesStart());
-      try {
-        let allEpisodes = [];
-        let nextPage = `https://rickandmortyapi.com/api/episode/`;
+export const fetchEpisodes = (episodeURLs = []) => {
+  return async (dispatch) => {
+    dispatch(fetchEpisodesStart());
+    try {
+      let allEpisodes = [];
+      if (episodeURLs.length > 0) {
+        const responses = await Promise.all(episodeURLs.map((url) => axios.get(url)));
+        allEpisodes = responses.map((response) => response.data);
+      } else {
+        let nextPage = 'https://rickandmortyapi.com/api/episode/';
         while (nextPage) {
           const response = await axios.get(nextPage);
           allEpisodes = allEpisodes.concat(response.data.results);
           nextPage = response.data.info.next;
         }
-        dispatch(fetchEpisodesSuccess(allEpisodes));
-      } catch (error) {
-        dispatch(fetchEpisodesFail(error.message));
       }
-    };
+      dispatch(fetchEpisodesSuccess(allEpisodes));
+    } catch (error) {
+      dispatch(fetchEpisodesFail(error.message));
+    }
   };
-  
+};
+
 
 // Initial State
 const initialState = {

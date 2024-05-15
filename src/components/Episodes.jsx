@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllEpisodes } from './episodesReducer';
+import { fetchEpisodes } from './episodesReducer';
 import { Link } from "react-router-dom";
 
 const Episodes = () => {
@@ -10,7 +10,7 @@ const Episodes = () => {
   const episodesPerPage = 12;
 
   useEffect(() => {
-    dispatch(fetchAllEpisodes());
+    dispatch(fetchEpisodes());
   }, [dispatch]);
 
   const showEpisodes = () => {
