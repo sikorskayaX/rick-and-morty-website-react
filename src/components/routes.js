@@ -15,8 +15,9 @@ const routes = [
   { path: '/episodes', component: Episodes },
   { path: '/characters/:characterId', component: CharacterElement },
   { path: '/locations/:locationId', component: LocationElement },
-  { path: '/episodes/:episodeID', component: EpisodeElement },
+  { path: '/episodes/:episodeId', component: EpisodeElement },
 ];
+
 
 const AppRoutes = () => {
   return (

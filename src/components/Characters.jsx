@@ -73,10 +73,8 @@ const Characters = () => {
         {currentCharacters.map((character) => (
           <div className='characters__container' key={character.id}>
             <Link to={`/characters/${character.id}`}>
-            <div >
               <img className ="characters__image" src={character.image} alt={character.name} />
               <h6 className="characters__name">{character.name}</h6>
-            </div>
             </Link>
           </div>
         ))}

@@ -18,10 +18,11 @@ export const fetchLocations = (locationURLs = []) => {
     dispatch(fetchLocationsStart());
     try {
       let allLocations = [];
-      if (locationURLs.length > 0) {
-        const responses = await Promise.all(locationURLs.map((url) => axios.get(url)));
+      if(locationURLs.length > 0) {
+        const responses = await Promise.all(locationURLs.map((url) => (url ? axios.get(url) : 'unknown')));
         allLocations = responses.map((response) => response.data);
-      } else {
+      } 
+      else {
         let nextPage = 'https://rickandmortyapi.com/api/location/';
         while (nextPage) {
           const response = await axios.get(nextPage);
