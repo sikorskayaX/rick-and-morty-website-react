@@ -10,6 +10,7 @@ import LocationElement from './LocationElement';
 // Создаем массив объектов для маршрутизации
 const routes = [
   { path: '/', component: Characters },
+  { path: '/characters', component: Characters },
   { path: '/locations', component: Locations },
   { path: '/episodes', component: Episodes },
   { path: '/characters/:characterId', component: CharacterElement },

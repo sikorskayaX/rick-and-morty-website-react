@@ -1,6 +1,5 @@
 import './App.css';
-import Characters from './components/Characters';
-import { Footer } from './components/Footer';
+import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import AppRoutes from './components/routes';
 

@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 
-const FilterInput = ({ characters, onFilter }) => {
+const FilterInput = ({ className, characters, onFilter }) => {
   const [filter, setFilter] = useState('');
 
   const handleFilterChange = (event) => {
@@ -13,14 +13,13 @@ const FilterInput = ({ characters, onFilter }) => {
   };
 
   return (
-    <div className="filter-input">
       <input
+        className= {className}
         type="text"
         placeholder="Filter characters..."
         value={filter}
         onChange={handleFilterChange}
       />
-    </div>
   );
 };
 

@@ -10,7 +10,6 @@ const EpisodeElement = () => {
   const episode = useSelector((state) =>
     state.episodes.episodes.find((c) => c.id.toString() === episodeId)
   );
-
   const characters = useSelector((state) => state.characters.characters);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const EpisodeElement = () => {
                 </div>
                 <div className="episode__date">
                     <h4>{episode.air_date}</h4>
-                    <p className="small">December 2, 2013</p>
+                    <p className="small">{episode.air_date}</p>
                 </div>
         </div>
       </div>

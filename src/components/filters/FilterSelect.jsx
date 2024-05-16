@@ -13,7 +13,7 @@ const FilterSelect = ({ options, characters, onSelect, filterProperty }) => {
   };
 
   return (
-    <select onChange={handleFilterChange} value={filter}>
+    <select onChange={handleFilterChange} value={filter} className='filters__select'>
       <option value="" disabled>
         Select an option
       </option>

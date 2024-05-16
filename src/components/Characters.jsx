@@ -33,7 +33,8 @@ const Characters = () => {
 
   return (
     <main>
-      <FilterInput characters={characters} onFilter={setFilteredCharacters} />
+      <div className='filters'>
+      <FilterInput className = "filters__name-character" characters={characters} onFilter={setFilteredCharacters} />
       <FilterSelect
       options={[
         { value: '', label: 'All Genders' },
@@ -55,6 +56,18 @@ const Characters = () => {
       onSelect={setFilteredCharacters}
       filterProperty="species" // This is the property of the character to filter on
     />
+
+    <FilterSelect
+      options={[
+        { value: '', label: 'Status' },
+        { value: 'Alive', label: 'Alive' },
+        { value: 'Dead', label: 'Dead' }
+      ]}
+      characters={characters}
+      onSelect={setFilteredCharacters}
+      filterProperty="status" // This is the property of the character to filter on
+    />
+    </div>
 
       <div className='characters'>
         {currentCharacters.map((character) => (

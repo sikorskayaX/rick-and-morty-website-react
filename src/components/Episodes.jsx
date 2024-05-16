@@ -29,15 +29,14 @@ const Episodes = () => {
       <div className='episodes'>
         {currentEpisodes.map((episode) => (
           <Link to={`/episodes/${episode.id}`}>
-          <div className='episodes__container'>
-              <div key={episode.id}>
+          <div className='episodes__container'  key={episode.id}>
+              <div>
                 <h6>{episode.name}</h6>
-                <p class="regular">{episode.air_date}</p>
-                <p class="bold">{episode.episode}</p>
+                <p className="regular">{episode.air_date}</p>
+                <p className="bold">{episode.episode}</p>
               </div>
             </div>
           </Link>
-
         ))}
       </div>
       {indexOfLastEpisode < episodes.length && (

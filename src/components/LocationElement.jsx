@@ -25,16 +25,16 @@ const LocationElement = () => {
 
   return (
     <div>
-      <div class="location__about" id="location__about">
-        <p class="big">Earth (Replacement Dimension)</p>
-        <div class="location__properties">
-                <div class="location__type">
+      <div className="location__about" id="location__about">
+        <p className="big">{location.name}</p>
+        <div className="location__properties">
+                <div className="location__type">
                     <h4>Type</h4>
-                    <p class="small">{location.type}</p>
+                    <p className="small">{location.type}</p>
                 </div>
-                <div class="location__dimension">
+                <div className="location__dimension">
                     <h4>Dimension</h4>
-                    <p class="small">{location.dimension}</p>
+                    <p className="small">{location.dimension}</p>
                 </div>
         </div>
       </div>
