@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllLocations } from './locationsReducer';
+import { fetchLocations } from './locationsReducer';
 import { Link } from "react-router-dom";
 
 const Locations = () => {
@@ -10,7 +10,7 @@ const Locations = () => {
   const locationsPerPage = 12;
 
   useEffect(() => {
-    dispatch(fetchAllLocations());
+    dispatch(fetchLocations());
   }, [dispatch]);
 
   const showLocations = () => {
@@ -28,14 +28,14 @@ const Locations = () => {
     <main>
       <div className='locations'>
         {currentLocations.map((location) => (
-          <div className='locations__container'  key={location.id}>
-            <Link to={`/locations/${location.id}`}>
-            <div>
-              <h6 className="locations__name">{location.name}</h6>
-              <h6 className="locations__name">{location.type}</h6>
+          <Link to={`/locations/${location.id}`}>
+            <div className='locations__container'  key={location.id}>
+              <div>
+                <h6 className="locations__name">{location.name}</h6>
+                <h6 className="locations__name">{location.type}</h6>
+              </div>
             </div>
-            </Link>
-          </div>
+          </Link>
         ))}
       </div>
       {indexOfLastLocation < locations.length && (

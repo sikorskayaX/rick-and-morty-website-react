@@ -13,24 +13,29 @@ export const fetchLocationsFail = (error) => ({ type: FETCH_LOCATIONS_FAIL, payl
 export const setPage = (page) => ({ type: SET_PAGE, payload: page });
 
 // Thunk для загрузки всех персонажей
-export const fetchAllLocations = () => {
-    return async (dispatch) => {
-      dispatch(fetchLocationsStart());
-      try {
-        let allLocations = [];
-        let nextPage = `https://rickandmortyapi.com/api/location/`;
+export const fetchLocations = (locationURLs = []) => {
+  return async (dispatch) => {
+    dispatch(fetchLocationsStart());
+    try {
+      let allLocations = [];
+      if (locationURLs.length > 0) {
+        const responses = await Promise.all(locationURLs.map((url) => axios.get(url)));
+        allLocations = responses.map((response) => response.data);
+      } else {
+        let nextPage = 'https://rickandmortyapi.com/api/location/';
         while (nextPage) {
           const response = await axios.get(nextPage);
           allLocations = allLocations.concat(response.data.results);
           nextPage = response.data.info.next;
         }
-        dispatch(fetchLocationsSuccess(allLocations));
-      } catch (error) {
-        dispatch(fetchLocationsFail(error.message));
       }
-    };
+      dispatch(fetchLocationsSuccess(allLocations));
+    } catch (error) {
+      dispatch(fetchLocationsFail(error.message));
+    }
   };
-  
+};
+
 
 // Initial State
 const initialState = {

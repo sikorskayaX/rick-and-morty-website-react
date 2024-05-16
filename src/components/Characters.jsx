@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCharacters } from './charactersReducer';
+import { fetchCharacters } from './charactersReducer';
 import { Link } from "react-router-dom";
 import FilterInput from './filters/FilterInput';
 import FilterSelect from './filters/FilterSelect';
@@ -13,7 +13,7 @@ const Characters = () => {
   const charactersPerPage = 8;
 
   useEffect(() => {
-    dispatch(fetchAllCharacters());
+    dispatch(fetchCharacters());
   }, [dispatch]);
 
   useEffect(() => {
