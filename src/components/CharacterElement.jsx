@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEpisodes } from './episodesReducer';
 import { fetchLocations } from './locationsReducer';
 import { Link } from "react-router-dom";
+import GoBack from './GoBack';
 
 const CharacterElement = () => {
   const { characterId } = useParams();
@@ -35,6 +36,7 @@ const CharacterElement = () => {
 
   return (
     <div>
+      <GoBack/>
       <div className='character__head'>
         <img className='character__image' src={character.image} alt={character.name} />
         <h1>{character.name}</h1>

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from './charactersReducer';
 import { Link } from "react-router-dom";
+import GoBack from './GoBack';
 
 const EpisodeElement = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const EpisodeElement = () => {
 
   return (
     <div>
+      <GoBack/>
       <div className="episode__about">
         <p className="big">{episode.name}</p>
         <div className="episode__properties">

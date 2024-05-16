@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from './charactersReducer';
 import { Link } from "react-router-dom";
+import GoBack from './GoBack';
 
 const LocationElement = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const LocationElement = () => {
 
   return (
     <div>
+      <GoBack/>
       <div className="location__about" id="location__about">
         <p className="big">{location.name}</p>
         <div className="location__properties">
