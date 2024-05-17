@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLocations } from './locationsReducer';
+import { fetchLocations, resetLocations } from './locationsReducer';
 import FilterInput from './filters/FilterInput';
 import FilterSelect from './filters/FilterSelect';
 import { Link } from "react-router-dom";
@@ -14,8 +14,11 @@ const Locations = () => {
   const locationsPerPage = 12;
 
   useEffect(() => {
+    dispatch(resetLocations());
     dispatch(fetchLocations());
   }, [dispatch]);
+
+
 
   useEffect(() => {
     setFilteredLocations(locations);
@@ -35,7 +38,7 @@ const Locations = () => {
   return (
     <body>
       <header className='header'>
-        <img src= {logoBig} alt="logo" class="header__logo"/>
+        <img src= {logoBig} alt="logo" className="header__logo"/>
       </header>
       <main>
           <div className='filters'>

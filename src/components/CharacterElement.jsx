@@ -24,7 +24,6 @@ const CharacterElement = () => {
 
   useEffect(() => {
     if (character) {
-      console.log([character.origin.url, character.location.url])
       dispatch(fetchLocations([character.origin.url, character.location.url]));
     }
   }, [dispatch, character]);
@@ -55,11 +54,11 @@ const CharacterElement = () => {
             </div>
             <div className='character__information'>
               <p className='character__info-title'>Species</p>
-              <p className='small'>{character.species}</p>
+              <p className='small'>{character?.species || 'unknown'}</p>
             </div>
             <div className='character__information'>
               <p className='character__info-title'>Type</p>
-              <p className='small'>{character.type}</p>
+              <p className='small'>{character?.type || 'unknown'}</p>
             </div>
             <Link to={`/locations/${locations[0]?.id}`}>
             <div className='character__information-clickable'>

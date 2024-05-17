@@ -36,7 +36,7 @@ const Characters = () => {
   return (
     <body>
       <header className='header'>
-        <img src= {logoBig} alt="logo" class="header__logo"/>
+        <img src= {logoBig} alt="logo" className="header__logo"/>
       </header>
       <main>
         <div className='filters'>

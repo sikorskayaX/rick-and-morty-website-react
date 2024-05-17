@@ -5,12 +5,14 @@ const FETCH_LOCATIONS_START = 'FETCH_LOCATIONS_START';
 const FETCH_LOCATIONS_SUCCESS = 'FETCH_LOCATIONS_SUCCESS';
 const FETCH_LOCATIONS_FAIL = 'FETCH_LOCATIONS_FAIL';
 const SET_PAGE = 'SET_PAGE';
+const RESET_LOCATIONS = 'RESET_LOCATIONS';
 
 // Action Creators
 export const fetchLocationsStart = () => ({ type: FETCH_LOCATIONS_START });
 export const fetchLocationsSuccess = (locations) => ({ type: FETCH_LOCATIONS_SUCCESS, payload: locations });
 export const fetchLocationsFail = (error) => ({ type: FETCH_LOCATIONS_FAIL, payload: error });
 export const setPage = (page) => ({ type: SET_PAGE, payload: page });
+export const resetLocations = () => ({ type: RESET_LOCATIONS });
 
 // Thunk для загрузки всех персонажей
 export const fetchLocations = (locationURLs = []) => {
@@ -57,6 +59,8 @@ const locationsReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: action.payload };
     case SET_PAGE:
       return { ...state, page: action.payload };
+    case RESET_LOCATIONS:
+        return {...state, locations: [], loading: false, error: null,};
     default:
       return state;
   }
