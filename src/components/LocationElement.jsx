@@ -16,26 +16,27 @@ const LocationElement = () => {
 
 
   return (
-    <div>
-      <div className='character__head'>
-        <GoBack/>
-        <div className="location__about" id="location__about">
-          <p className="big">{location.name}</p>
-          <div className="location__properties">
-                  <div className="location__type">
-                      <h4>Type</h4>
-                      <p className="small">{location.type}</p>
-                  </div>
-                  <div className="location__dimension">
-                      <h4>Dimension</h4>
-                      <p className="small">{location.dimension}</p>
-                  </div>
+    <body>
+      <main>
+        <div className='character__head'>
+          <GoBack/>
+          <div className="location__about" id="location__about">
+            <p className="big">{location.name}</p>
+            <div className="location__properties">
+                    <div className="location__type">
+                        <h4>Type</h4>
+                        <p className="small">{location.type}</p>
+                    </div>
+                    <div className="location__dimension">
+                        <h4>Dimension</h4>
+                        <p className="small">{location.dimension}</p>
+                    </div>
+            </div>
           </div>
         </div>
-      </div>
-      <CharactersList characterURLs = {location.residents}/>
-    </div>
-    
+        <CharactersList characterURLs = {location.residents}/>
+      </main>
+    </body>
   );
 };
 

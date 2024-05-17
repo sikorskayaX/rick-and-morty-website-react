@@ -2,7 +2,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLocations } from './locationsReducer';
 import FilterInput from './filters/FilterInput';
+import FilterSelect from './filters/FilterSelect';
 import { Link } from "react-router-dom";
+import logoBig from './images/rick-and-morty-1.png';
 
 const Locations = () => {
   const dispatch = useDispatch();
@@ -31,30 +33,56 @@ const Locations = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <main>
-        <div className='filters'>
-        <FilterInput
-          className="filters__name-location"
-          items={locations}
-          onChange={setFilteredLocations}
-        />
-      </div>
-      <div className='locations'>
-        {currentLocations.map((location) => (
-          <Link to={`/locations/${location.id}`}>
-            <div className='locations__container'  key={location.id}>
-              <div>
-                <h6 className="locations__name">{location.name}</h6>
-                <p className="regular">{location.type}</p>
+    <body>
+      <header className='header'>
+        <img src= {logoBig} alt="logo" class="header__logo"/>
+      </header>
+      <main>
+          <div className='filters'>
+          <FilterInput
+            className="filters__name-location"
+            items={locations}
+            onChange={setFilteredLocations}
+          />
+      <FilterSelect
+        options={[
+          { value: '', label: 'Type' },
+          { value: 'Planet', label: 'Planet' },
+          { value: 'Space station', label: 'Space station' }
+        ]}
+        characters={locations}
+        onSelect={setFilteredLocations}
+        filterProperty="type" // This is the property of the character to filter on
+      />
+      <FilterSelect
+        options={[
+          { value: '', label: 'Dimension' },
+          { value: 'Post-Apocalyptic Dimension', label: 'Post-Apocalyptic Dimension' },
+          { value: 'Cronenberg Dimension', label: 'Cronenberg Dimension' },
+          { value: 'Chair Dimension', label: 'Chair Dimension' }
+        ]}
+        characters={locations}
+        onSelect={setFilteredLocations}
+        filterProperty="dimension" // This is the property of the character to filter on
+      />          
+        </div>
+        <div className='locations'>
+          {currentLocations.map((location) => (
+            <Link to={`/locations/${location.id}`}>
+              <div className='locations__container'  key={location.id}>
+                <div>
+                  <h6 className="locations__name">{location.name}</h6>
+                  <p className="regular">{location.type}</p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-      {indexOfLastLocation < locations.length && (
-        <button onClick={showLocations}>Load More</button>
-      )}
-    </main>
+            </Link>
+          ))}
+        </div>
+        {indexOfLastLocation < locations.length && (
+          <button onClick={showLocations}>Load More</button>
+        )}
+      </main>
+    </body>
   );
 };
 

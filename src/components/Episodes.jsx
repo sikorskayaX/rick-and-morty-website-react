@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEpisodes } from './episodesReducer';
 import FilterInput from './filters/FilterInput';
 import { Link } from "react-router-dom";
+import logoBig from './images/rick-and-morty-2.png';
 
 const Episodes = () => {
   const dispatch = useDispatch();
@@ -31,31 +32,36 @@ const Episodes = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <main>
-      <div className='filters'>
-        <FilterInput
-          className="filters__name-episode"
-          items={episodes}
-          onChange={setFilteredEpisodes}
-        />
-      </div>
-      <div className='episodes'>
-        {currentEpisodes.map((episode) => (
-          <Link to={`/episodes/${episode.id}`}>
-          <div className='episodes__container'  key={episode.id}>
-              <div>
-                <h6>{episode.name}</h6>
-                <p className="regular">{episode.air_date}</p>
-                <p className="bold">{episode.episode}</p>
+    <body>
+      <header className='header'>
+        <img src= {logoBig} alt="logo" class="header__logo"/>
+      </header>
+      <main>
+        <div className='filters'>
+          <FilterInput
+            className="filters__name-episode"
+            items={episodes}
+            onChange={setFilteredEpisodes}
+          />
+        </div>
+        <div className='episodes'>
+          {currentEpisodes.map((episode) => (
+            <Link to={`/episodes/${episode.id}`}>
+            <div className='episodes__container'  key={episode.id}>
+                <div>
+                  <h6>{episode.name}</h6>
+                  <p className="regular">{episode.air_date}</p>
+                  <p className="bold">{episode.episode}</p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-      {indexOfLastEpisode < episodes.length && (
-        <button onClick={showEpisodes}>Load More</button>
-      )}
-    </main>
+            </Link>
+          ))}
+        </div>
+        {indexOfLastEpisode < episodes.length && (
+          <button onClick={showEpisodes}>Load More</button>
+        )}
+      </main>
+    </body>
   );
 };
 
