@@ -34,7 +34,7 @@ const Characters = () => {
   return (
     <main>
       <div className='filters'>
-      <FilterInput className = "filters__name-character" characters={characters} onFilter={setFilteredCharacters} />
+      <FilterInput className = "filters__name-character" items={characters} onChange={setFilteredCharacters} />
       <FilterSelect
       options={[
         { value: '', label: 'All Genders' },
@@ -72,10 +72,11 @@ const Characters = () => {
       <div className='characters'>
         {currentCharacters.map((character) => (
           <div className='characters__container' key={character.id}>
-            <Link to={`/characters/${character.id}`}>
-              <img className ="characters__image" src={character.image} alt={character.name} />
-              <h6 className="characters__name">{character.name}</h6>
-            </Link>
+          <Link to={`/characters/${character.id}`}>
+            <img className="characters__image" src={character.image} alt={character.name} />
+            <h6 className="characters__name">{character.name}</h6>
+            <p className='characters__species regular'>{character.species}</p>
+          </Link>
           </div>
         ))}
       </div>

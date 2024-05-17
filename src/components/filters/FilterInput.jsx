@@ -1,25 +1,25 @@
 ﻿import React, { useState } from 'react';
 
-const FilterInput = ({ className, characters, onFilter }) => {
+const FilterInput = ({ className, items, onChange, filterProperty = 'name' }) => {
   const [filter, setFilter] = useState('');
 
   const handleFilterChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.toLowerCase();
     setFilter(value);
-    const filteredCharacters = characters.filter((character) =>
-      character.name.toLowerCase().includes(value.toLowerCase())
+    const filteredItems = items.filter((item) =>
+      item[filterProperty].toLowerCase().includes(value)
     );
-    onFilter(filteredCharacters);
+    onChange(filteredItems);
   };
 
   return (
-      <input
-        className= {className}
-        type="text"
-        placeholder="Filter characters..."
-        value={filter}
-        onChange={handleFilterChange}
-      />
+    <input
+      className={className}
+      type="text"
+      placeholder={`Filter by ${filterProperty}...`}
+      value={filter}
+      onChange={handleFilterChange}
+    />
   );
 };
 
