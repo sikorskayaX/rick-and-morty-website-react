@@ -1,10 +1,10 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLocations, resetLocations } from './locationsReducer';
-import FilterInput from './filters/FilterInput';
-import FilterSelect from './filters/FilterSelect';
+import { fetchLocations, resetLocations } from '../redux/locationsReducer';
+import FilterInput from '../filters/FilterInput';
+import FilterSelect from '../filters/FilterSelect';
 import { Link } from "react-router-dom";
-import logoBig from './images/rick-and-morty-1.png';
+import logoBig from '../images/rick-and-morty-1.png';
 
 const Locations = () => {
   const dispatch = useDispatch();

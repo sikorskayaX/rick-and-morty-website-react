@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharacters } from './charactersReducer';
+import { fetchCharacters } from './redux/charactersReducer';
 import { Link } from "react-router-dom";
 
 const CharactersList = ({ characterURLs = [] }) => {

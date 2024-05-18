@@ -1,10 +1,10 @@
 ﻿import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEpisodes } from './episodesReducer';
-import { fetchLocations } from './locationsReducer';
+import { fetchEpisodes } from '../redux/episodesReducer';
+import { fetchLocations } from '../redux/locationsReducer';
 import { Link } from "react-router-dom";
-import GoBack from './GoBack';
+import GoBack from '../GoBack';
 
 const CharacterElement = () => {
   const { characterId } = useParams();

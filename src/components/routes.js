@@ -1,11 +1,11 @@
 ﻿import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Characters from './Characters';
-import Locations from './Locations';
-import Episodes from './Episodes';
-import CharacterElement from './CharacterElement';
-import EpisodeElement from './EpisodeElement';
-import LocationElement from './LocationElement';
+import Characters from './pages/Characters';
+import Locations from './pages/Locations';
+import Episodes from './pages/Episodes';
+import CharacterElement from './pages/CharacterElement';
+import EpisodeElement from './pages/EpisodeElement';
+import LocationElement from './pages/LocationElement';
 
 // Создаем массив объектов для маршрутизации
 const routes = [

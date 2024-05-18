@@ -1,11 +1,11 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharacters } from './charactersReducer';
+import { fetchCharacters } from '../redux/charactersReducer';
 import { Link } from "react-router-dom";
-import FilterInput from './filters/FilterInput';
-import FilterSelect from './filters/FilterSelect';
-import LoadMore from './LoadMore';
-import logoBig from './images/logo-big.png';
+import FilterInput from '../filters/FilterInput';
+import FilterSelect from '../filters/FilterSelect';
+import LoadMore from '../LoadMore';
+import logoBig from '../images/logo-big.png';
 
 const Characters = () => {
   const dispatch = useDispatch();

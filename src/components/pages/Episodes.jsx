@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEpisodes } from './episodesReducer';
-import FilterInput from './filters/FilterInput';
+import { fetchEpisodes } from '../redux/episodesReducer';
+import FilterInput from '../filters/FilterInput';
 import { Link } from "react-router-dom";
-import logoBig from './images/rick-and-morty-2.png';
+import logoBig from '../images/rick-and-morty-2.png';
 
 const Episodes = () => {
   const dispatch = useDispatch();
