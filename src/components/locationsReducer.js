@@ -15,11 +15,12 @@ export const setPage = (page) => ({ type: SET_PAGE, payload: page });
 export const resetLocations = () => ({ type: RESET_LOCATIONS });
 
 // Thunk для загрузки всех персонажей
-export const fetchLocations = (locationURLs = []) => {
+export const fetchLocations = (URLs = []) => {
   return async (dispatch) => {
     dispatch(fetchLocationsStart());
     try {
       let allLocations = [];
+      const locationURLs = URLs.filter(Boolean);
       if(locationURLs.length > 0) {
         const responses = await Promise.all(locationURLs.map((url) => (url ? axios.get(url) : 'unknown')));
         allLocations = responses.map((response) => response.data);

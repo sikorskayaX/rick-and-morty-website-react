@@ -42,6 +42,7 @@ const Episodes = () => {
             className="filters__name-episode"
             items={episodes}
             onChange={setFilteredEpisodes}
+            placeholder = 'Filter by name or episode (ex. S01 or S01E02)'
           />
         </div>
         <div className='episodes'>

@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 
-const FilterInput = ({ className, items, onChange, filterProperty = 'name' }) => {
+const FilterInput = ({ className, items, onChange, placeholder = 'Filter by name...', filterProperty = 'name' }) => {
   const [filter, setFilter] = useState('');
 
   const handleFilterChange = (event) => {
@@ -16,7 +16,7 @@ const FilterInput = ({ className, items, onChange, filterProperty = 'name' }) =>
     <input
       className={className}
       type="text"
-      placeholder={`Filter by ${filterProperty}...`}
+      placeholder={placeholder}
       value={filter}
       onChange={handleFilterChange}
     />

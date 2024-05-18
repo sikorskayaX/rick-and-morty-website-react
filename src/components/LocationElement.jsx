@@ -6,8 +6,10 @@ import CharactersList from './CharactersList';
 
 const LocationElement = () => {
   const { locationId } = useParams();
+  console.log('id', locationId)
   const location = useSelector((state) =>
-    state.locations.locations.find((c) => c.id.toString() === locationId)
+    state.locations.locations.find((c) => 
+      c.id.toString() === locationId)
   );
 
   if (!location) {

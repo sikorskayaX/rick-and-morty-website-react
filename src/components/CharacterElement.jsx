@@ -16,6 +16,7 @@ const CharacterElement = () => {
   const episodes = useSelector((state) => state.episodes.episodes);
   const locations = useSelector((state) => state.locations.locations);
 
+  
   useEffect(() => {
     if (character && character.episode) {
       dispatch(fetchEpisodes(character.episode));
@@ -24,7 +25,7 @@ const CharacterElement = () => {
 
   useEffect(() => {
     if (character) {
-      dispatch(fetchLocations([character.origin.url, character.location.url]));
+      dispatch(fetchLocations([character.location.url, character.origin.url]));
     }
   }, [dispatch, character]);
 
@@ -32,6 +33,7 @@ const CharacterElement = () => {
   if (!character) {
     return <div>Character not found</div>;
   }
+  
 
   return (
     <body>
@@ -60,17 +62,17 @@ const CharacterElement = () => {
               <p className='character__info-title'>Type</p>
               <p className='small'>{character?.type || 'unknown'}</p>
             </div>
-            <Link to={`/locations/${locations[0]?.id}`}>
-            <div className='character__information-clickable'>
-              <p className='character__info-title'>Origin</p>
-              <p className='small'>{locations[0]?.name || 'unknown'}</p>
-            </div>
+            <Link to={locations[0] ? `/locations/${locations[0].id}` : '#!'}>
+              <div className='character__information-clickable'>
+                <p className='character__info-title'>Planet</p>
+                <p className='small'>{locations[0]?.name || 'unknown'}</p>
+              </div>
             </Link>
-            <Link to={`/locations/${locations[1]?.id}`}>
-            <div className='character__information-clickable'>
-              <p className='character__info-title'>Planet</p>
-              <p className='small'>{locations[1]?.name || 'unknown'}</p>
-            </div>
+            <Link to={locations[1] ? `/locations/${locations[1].id}` : '#!'}>
+              <div className='character__information-clickable'>
+                <p className='character__info-title'>Origin</p>
+                <p className='small'>{locations[1]?.name || 'unknown'}</p>
+              </div>
             </Link>
           </div>
           <div className='character__episodes'>

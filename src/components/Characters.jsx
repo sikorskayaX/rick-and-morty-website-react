@@ -43,7 +43,7 @@ const Characters = () => {
         <FilterInput className = "filters__name-character" items={characters} onChange={setFilteredCharacters} />
         <FilterSelect
         options={[
-          { value: '', label: 'All Genders' },
+          { value: '', label: 'Gender' },
           { value: 'Male', label: 'Male' },
           { value: 'Female', label: 'Female' }
         ]}
@@ -54,7 +54,7 @@ const Characters = () => {
 
       <FilterSelect
         options={[
-          { value: '', label: 'All Species' },
+          { value: '', label: 'Species' },
           { value: 'Human', label: 'Human' },
           { value: 'Alien', label: 'Alien' }
         ]}
