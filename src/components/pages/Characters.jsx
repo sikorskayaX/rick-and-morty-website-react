@@ -52,18 +52,19 @@ const Characters = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <body>
+    <>
       <header className='header'>
         <img src= {logoBig} alt="logo" className="header__logo"/>
       </header>
-      <main>
+      <main className='main'>
         <div className='filters'>
         <FilterInput className = "filters__name-character" onChange={setNameFilter} />
         <FilterSelect
         options={[
           { value: '', label: 'Gender' },
           { value: 'Male', label: 'Male' },
-          { value: 'Female', label: 'Female' }
+          { value: 'Female', label: 'Female' },
+          { value: 'Genderless', label: 'Genderless' }
         ]}
         onSelect={setGenderFilter}
         filterProperty="gender" 
@@ -73,7 +74,15 @@ const Characters = () => {
         options={[
           { value: '', label: 'Species' },
           { value: 'Human', label: 'Human' },
-          { value: 'Alien', label: 'Alien' }
+          { value: 'Alien', label: 'Alien' },
+          { value: 'Mythological Creature', label: 'Mythological Creature' },
+          { value: 'Humanoid', label: 'Humanoid' },
+          { value: 'Poopybutthole', label: 'Poopybutthole' },
+          { value: 'Disease', label: 'Disease' },
+          { value: 'Robot', label: 'Robot' },
+          { value: 'Cronenberg', label: 'Cronenberg' },
+          { value: 'Animal', label: 'Animal' },
+          { value: 'unknown', label: 'unknown' }
         ]}
         onSelect={setSpeciesFilter}
         filterProperty="species"
@@ -83,7 +92,8 @@ const Characters = () => {
         options={[
           { value: '', label: 'Status' },
           { value: 'Alive', label: 'Alive' },
-          { value: 'Dead', label: 'Dead' }
+          { value: 'Dead', label: 'Dead' }, 
+          { value: 'unknown', label: 'Unknown' }
         ]}
         onSelect={setStatusFilter}
         filterProperty="status"
@@ -106,7 +116,7 @@ const Characters = () => {
           isVisible={indexOfLastCharacter < filteredCharacters.length} 
         />
       </main>
-    </body>
+    </>
   );
 };
 

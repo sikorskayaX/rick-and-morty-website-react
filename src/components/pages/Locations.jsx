@@ -48,18 +48,25 @@ const Locations = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <body>
+    <>
       <header className='header'>
         <img src= {logoBig} alt="logo" className="header__logo"/>
       </header>
-      <main>
+      <main className='main'>
           <div className='filters'>
           <FilterInput className="filters__name-location" onChange={setNameFilter}/>
       <FilterSelect
         options={[
           { value: '', label: 'Type' },
           { value: 'Planet', label: 'Planet' },
-          { value: 'Space station', label: 'Space station' }
+          { value: 'Space station', label: 'Space station' },
+          { value: 'TV', label: 'TV' },
+          { value: 'Resort', label: 'Resort' },
+          { value: 'Dream', label: 'Dream' },
+          { value: 'Microverse', label: 'Microverse' },
+          { value: 'Fantasy town', label: 'Fantasy town' },
+          { value: 'Game', label: 'Game' },
+          { value: 'Menagerie', label: 'Menagerie' },
         ]}
         onSelect={setTypeFilter}
         filterProperty="type" // This is the property of the location to filter on
@@ -67,9 +74,11 @@ const Locations = () => {
       <FilterSelect
         options={[
           { value: '', label: 'Dimension' },
+          { value: 'Replacement Dimension', label: 'Replacement Dimension' },
           { value: 'Post-Apocalyptic Dimension', label: 'Post-Apocalyptic Dimension' },
           { value: 'Cronenberg Dimension', label: 'Cronenberg Dimension' },
-          { value: 'Chair Dimension', label: 'Chair Dimension' }
+          { value: 'Chair Dimension', label: 'Chair Dimension' },
+          { value: 'Cromulon Dimension', label: 'Cromulon Dimension' },
         ]}
         onSelect={setDimensionFilter}
         filterProperty="dimension" // This is the property of the location to filter on
@@ -77,21 +86,19 @@ const Locations = () => {
         </div>
         <div className='locations'>
           {currentLocations.map((location) => (
-            <Link to={`/locations/${location.id}`}>
               <div className='locations__container'  key={location.id}>
-                <div>
+                  <Link to={`/locations/${location.id}`}>
                   <h6 className="locations__name">{location.name}</h6>
                   <p className="regular">{location.type}</p>
-                </div>
+                  </Link>
               </div>
-            </Link>
           ))}
         </div>
         {indexOfLastLocation < filteredLocations.length && (
           <button onClick={showLocations}>Load More</button>
         )}
       </main>
-    </body>
+    </>
   );
 };
 

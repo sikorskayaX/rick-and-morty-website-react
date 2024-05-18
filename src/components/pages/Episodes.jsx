@@ -42,11 +42,11 @@ const Episodes = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <body>
+    <>
       <header className='header'>
         <img src= {logoBig} alt="logo" className="header__logo"/>
       </header>
-      <main>
+      <main className='main'>
         <div className='filters'>
         <FilterInput 
           className = "filters__name-episode" 
@@ -57,22 +57,20 @@ const Episodes = () => {
         </div>
         <div className='episodes'>
           {currentEpisodes.map((episode) => (
-            <Link to={`/episodes/${episode.id}`}>
             <div className='episodes__container'  key={episode.id}>
-                <div>
+              <Link to={`/episodes/${episode.id}`}>
                   <h6>{episode.name}</h6>
                   <p className="regular">{episode.air_date}</p>
                   <p className="bold">{episode.episode}</p>
-                </div>
+              </Link>
               </div>
-            </Link>
           ))}
         </div>
         {indexOfLastEpisode < filteredEpisodes.length && (
           <button onClick={showEpisodes}>Load More</button>
         )}
       </main>
-    </body>
+    </>
   );
 };
 

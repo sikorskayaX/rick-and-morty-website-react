@@ -36,8 +36,8 @@ const CharacterElement = () => {
   
 
   return (
-    <body>
-      <main>
+    <>
+      <main className='main'>
         <GoBack/>
         <div className='character__head'>
           <img className='character__image' src={character.image} alt={character.name} />
@@ -79,19 +79,19 @@ const CharacterElement = () => {
             <h2 className='character__informations-title'>Episodes</h2>
             <div className="character__episodes-container" >
             {episodes.map((episode) => (
-                <Link to={`/episodes/${episode.id}`}>
                 <div className='character__episode'key={episode.id}>
+                  <Link to={`/episodes/${episode.id}`}>
                   <h2 className='character__info-title'>{episode.episode} </h2>
                   <p className='small'>{episode.name}</p>
                   <p className='little'>{episode.air_date}</p>
+                  </Link>
                 </div>
-                </Link>
             ))}
             </div>
           </div>
         </div>
       </main>
-    </body>
+    </>
   );
 };
 

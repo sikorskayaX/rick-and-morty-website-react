@@ -5,7 +5,7 @@ const LoadMore = ({ onClick, isVisible }) => {
   
     return (
       <div className="medium">
-        <button onClick={onClick}>Load More</button>
+        <button className='medium__button' onClick={onClick}>Load More</button>
       </div>
     );
   };

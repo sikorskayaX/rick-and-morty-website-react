@@ -10,15 +10,14 @@ const EpisodeElement = () => {
     state.episodes.episodes.find((c) => c.id.toString() === episodeId)
   );
 
-  console.log(episode.characters)
   if (!episode) {
     return <div>Episode not found</div>;
   }
 
   return (
-    <body>
-      <header></header>
-      <main>
+    <>
+      <header className='header'></header>
+      <main className='main'>
         <div className='character__head'>
           <GoBack/>
           <div className="episode__about">
@@ -35,9 +34,10 @@ const EpisodeElement = () => {
             </div>
           </div>
         </div>
+        <h6  className ="main__title">Cast</h6>
         <CharactersList characterURLs = {episode.characters}/>
       </main>
-    </body>
+    </>
   );
 };
 

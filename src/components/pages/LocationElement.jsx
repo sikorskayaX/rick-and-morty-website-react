@@ -6,7 +6,6 @@ import CharactersList from '../CharactersList';
 
 const LocationElement = () => {
   const { locationId } = useParams();
-  console.log('id', locationId)
   const location = useSelector((state) =>
     state.locations.locations.find((c) => 
       c.id.toString() === locationId)
@@ -18,8 +17,8 @@ const LocationElement = () => {
 
 
   return (
-    <body>
-      <main>
+    <>
+      <main className='main'>
         <div className='character__head'>
           <GoBack/>
           <div className="location__about" id="location__about">
@@ -36,9 +35,10 @@ const LocationElement = () => {
             </div>
           </div>
         </div>
+        <h6  className ="main__title">Residents</h6>
         <CharactersList characterURLs = {location.residents}/>
       </main>
-    </body>
+    </>
   );
 };
 
