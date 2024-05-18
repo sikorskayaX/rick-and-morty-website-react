@@ -12,15 +12,33 @@ const Characters = () => {
   const { characters, loading, error } = useSelector((state) => state.characters);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [speciesFilter, setSpeciesFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [genderFilter, setGenderFilter] = useState('');
   const charactersPerPage = 8;
+
+  useEffect(() => {
+    const applyFilters = () => {
+      const filtered = characters.filter((character) => {
+        const matchesName = nameFilter === '' || character.name.toLowerCase().includes(nameFilter);
+        const matchesSpecies = speciesFilter === '' || character.species === speciesFilter;
+        const matchesStatus = statusFilter === '' || character.status === statusFilter;
+        const matchesGender = genderFilter === '' || character.gender === genderFilter;
+        return matchesSpecies && matchesStatus && matchesGender && matchesName;
+      });
+      setFilteredCharacters(filtered);
+    };
+
+    applyFilters();
+  }, [characters, speciesFilter, statusFilter, genderFilter, nameFilter]);
+
+
 
   useEffect(() => {
     dispatch(fetchCharacters());
   }, [dispatch]);
 
-  useEffect(() => {
-    setFilteredCharacters(characters);
-  }, [characters]);
 
   const showCharacters = () => {
     setCurrentPage(currentPage + 1);
@@ -40,16 +58,15 @@ const Characters = () => {
       </header>
       <main>
         <div className='filters'>
-        <FilterInput className = "filters__name-character" items={characters} onChange={setFilteredCharacters} />
+        <FilterInput className = "filters__name-character" onChange={setNameFilter} />
         <FilterSelect
         options={[
           { value: '', label: 'Gender' },
           { value: 'Male', label: 'Male' },
           { value: 'Female', label: 'Female' }
         ]}
-        characters={characters}
-        onSelect={setFilteredCharacters}
-        filterProperty="gender" // This is the property of the character to filter on
+        onSelect={setGenderFilter}
+        filterProperty="gender" 
         />
 
       <FilterSelect
@@ -58,9 +75,8 @@ const Characters = () => {
           { value: 'Human', label: 'Human' },
           { value: 'Alien', label: 'Alien' }
         ]}
-        characters={characters}
-        onSelect={setFilteredCharacters}
-        filterProperty="species" // This is the property of the character to filter on
+        onSelect={setSpeciesFilter}
+        filterProperty="species"
       />
 
       <FilterSelect
@@ -69,9 +85,8 @@ const Characters = () => {
           { value: 'Alive', label: 'Alive' },
           { value: 'Dead', label: 'Dead' }
         ]}
-        characters={characters}
-        onSelect={setFilteredCharacters}
-        filterProperty="status" // This is the property of the character to filter on
+        onSelect={setStatusFilter}
+        filterProperty="status"
       />
       </div>
 
@@ -88,7 +103,7 @@ const Characters = () => {
         </div>
         <LoadMore 
           onClick={showCharacters} 
-          isVisible={indexOfLastCharacter < characters.length} 
+          isVisible={indexOfLastCharacter < filteredCharacters.length} 
         />
       </main>
     </body>

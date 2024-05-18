@@ -10,6 +10,7 @@ const Episodes = () => {
   const { episodes, loading, error } = useSelector((state) => state.episodes);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredEpisodes, setFilteredEpisodes] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
   const episodesPerPage = 12;
 
   useEffect(() => {
@@ -19,6 +20,15 @@ const Episodes = () => {
   useEffect(() => {
     setFilteredEpisodes(episodes);
   }, [episodes]);
+
+  useEffect(() => {
+    setFilteredEpisodes(
+      episodes.filter((episode) =>
+        episode.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+        episode.episode.toLowerCase().includes(nameFilter.toLowerCase())
+      )
+    );
+  }, [episodes, nameFilter]);  
 
   const showEpisodes = () => {
     setCurrentPage(currentPage + 1);
@@ -38,12 +48,12 @@ const Episodes = () => {
       </header>
       <main>
         <div className='filters'>
-          <FilterInput
-            className="filters__name-episode"
-            items={episodes}
-            onChange={setFilteredEpisodes}
-            placeholder = 'Filter by name or episode (ex. S01 or S01E02)'
-          />
+        <FilterInput 
+          className = "filters__name-episode" 
+          onChange={setNameFilter} 
+          placeholder = 'Filter by name or episode (ex. S01 or S01E02)'
+        />
+
         </div>
         <div className='episodes'>
           {currentEpisodes.map((episode) => (
@@ -58,7 +68,7 @@ const Episodes = () => {
             </Link>
           ))}
         </div>
-        {indexOfLastEpisode < episodes.length && (
+        {indexOfLastEpisode < filteredEpisodes.length && (
           <button onClick={showEpisodes}>Load More</button>
         )}
       </main>

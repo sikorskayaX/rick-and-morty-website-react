@@ -1,24 +1,13 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React from 'react';
 
-const FilterSelect = ({ options, characters, onSelect, filterProperty }) => {
-  const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    handleFilterChange({ target: { value: filter } });
-  }, [characters, filterProperty, onSelect]);
-
+const FilterSelect = ({ options, onSelect }) => {
   const handleFilterChange = (event) => {
     const value = event.target.value;
-    setFilter(value);
-
-    const filteredCharacters = characters.filter((character) =>
-      value === '' ? true : character[filterProperty] === value
-    );
-    onSelect(filteredCharacters);
+    onSelect(value);
   };
 
   return (
-    <select onChange={handleFilterChange} value={filter} className='filters__select'>
+    <select onChange={handleFilterChange} className='filters__select'>
       {options.map((option, index) => (
         <option key={index} value={option.value}>
           {option.label}
@@ -29,3 +18,4 @@ const FilterSelect = ({ options, characters, onSelect, filterProperty }) => {
 };
 
 export default FilterSelect;
+

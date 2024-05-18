@@ -1,15 +1,12 @@
 ﻿import React, { useState } from 'react';
 
-const FilterInput = ({ className, items, onChange, placeholder = 'Filter by name...', filterProperty = 'name' }) => {
-  const [filter, setFilter] = useState('');
+const FilterInput = ({ className, onChange, placeholder = 'Filter by name...', filterProperty = 'name' }) => {
+  const [value, setValue] = useState(''); // Add state to manage the input value
 
   const handleFilterChange = (event) => {
     const value = event.target.value.toLowerCase();
-    setFilter(value);
-    const filteredItems = items.filter((item) =>
-      item[filterProperty].toLowerCase().includes(value)
-    );
-    onChange(filteredItems);
+    setValue(value); 
+    onChange(value); 
   };
 
   return (
@@ -17,7 +14,7 @@ const FilterInput = ({ className, items, onChange, placeholder = 'Filter by name
       className={className}
       type="text"
       placeholder={placeholder}
-      value={filter}
+      value={value} // Use the state value here
       onChange={handleFilterChange}
     />
   );

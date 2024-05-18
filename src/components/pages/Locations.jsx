@@ -11,6 +11,9 @@ const Locations = () => {
   const { locations, loading, error } = useSelector((state) => state.locations);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredLocations, setFilteredLocations] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
+  const [dimensionFilter, setDimensionFilter] = useState('');
   const locationsPerPage = 12;
 
   useEffect(() => {
@@ -19,10 +22,19 @@ const Locations = () => {
   }, [dispatch]);
 
 
-
   useEffect(() => {
-    setFilteredLocations(locations);
-  }, [locations]);
+    const applyFilters = () => {
+      const filtered = locations.filter((location) => {
+        const matchesName = nameFilter === '' || location.name.toLowerCase().includes(nameFilter);
+        const matchesType = typeFilter === '' || location.type === typeFilter;
+        const matchesDimension = dimensionFilter === '' || location.dimension === dimensionFilter;
+        return matchesType && matchesDimension && matchesName;
+      });
+      setFilteredLocations(filtered);
+    };
+
+    applyFilters();
+  }, [locations, typeFilter, dimensionFilter, nameFilter]);
 
   const showLocations = () => {
     setCurrentPage(currentPage + 1);
@@ -42,20 +54,15 @@ const Locations = () => {
       </header>
       <main>
           <div className='filters'>
-          <FilterInput
-            className="filters__name-location"
-            items={locations}
-            onChange={setFilteredLocations}
-          />
+          <FilterInput className="filters__name-location" onChange={setNameFilter}/>
       <FilterSelect
         options={[
           { value: '', label: 'Type' },
           { value: 'Planet', label: 'Planet' },
           { value: 'Space station', label: 'Space station' }
         ]}
-        characters={locations}
-        onSelect={setFilteredLocations}
-        filterProperty="type" // This is the property of the character to filter on
+        onSelect={setTypeFilter}
+        filterProperty="type" // This is the property of the location to filter on
       />
       <FilterSelect
         options={[
@@ -64,9 +71,8 @@ const Locations = () => {
           { value: 'Cronenberg Dimension', label: 'Cronenberg Dimension' },
           { value: 'Chair Dimension', label: 'Chair Dimension' }
         ]}
-        characters={locations}
-        onSelect={setFilteredLocations}
-        filterProperty="dimension" // This is the property of the character to filter on
+        onSelect={setDimensionFilter}
+        filterProperty="dimension" // This is the property of the location to filter on
       />          
         </div>
         <div className='locations'>
@@ -81,7 +87,7 @@ const Locations = () => {
             </Link>
           ))}
         </div>
-        {indexOfLastLocation < locations.length && (
+        {indexOfLastLocation < filteredLocations.length && (
           <button onClick={showLocations}>Load More</button>
         )}
       </main>
