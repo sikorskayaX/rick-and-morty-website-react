@@ -4,12 +4,12 @@ import { fetchEpisodes } from '../redux/episodesReducer';
 import FilterInput from '../filters/FilterInput';
 import { Link } from "react-router-dom";
 import logoBig from '../images/rick-and-morty-2.png';
+import useFilteredEntities from '../useFilteredEntities'
 
 const Episodes = () => {
   const dispatch = useDispatch();
   const { episodes, loading, error } = useSelector((state) => state.episodes);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredEpisodes, setFilteredEpisodes] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const episodesPerPage = 12;
 
@@ -17,18 +17,9 @@ const Episodes = () => {
     dispatch(fetchEpisodes());
   }, [dispatch]);
 
-  useEffect(() => {
-    setFilteredEpisodes(episodes);
-  }, [episodes]);
-
-  useEffect(() => {
-    setFilteredEpisodes(
-      episodes.filter((episode) =>
-        episode.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
-        episode.episode.toLowerCase().includes(nameFilter.toLowerCase())
-      )
-    );
-  }, [episodes, nameFilter]);  
+  const filteredEpisodes = useFilteredEntities(episodes, [
+    { value: nameFilter, predicate: (episode, value) => (episode.name || episode.episode).toLowerCase().includes(value.toLowerCase()) },
+  ]);
 
   const showEpisodes = () => {
     setCurrentPage(currentPage + 1);
@@ -53,7 +44,6 @@ const Episodes = () => {
           onChange={setNameFilter} 
           placeholder = 'Filter by name or episode (ex. S01 or S01E02)'
         />
-
         </div>
         <div className='episodes'>
           {currentEpisodes.map((episode) => (

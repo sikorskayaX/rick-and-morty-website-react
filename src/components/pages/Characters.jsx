@@ -7,12 +7,12 @@ import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '../filters/filt
 import LoadMore from '../LoadMore';
 import logoBig from '../images/logo-big.png';
 import CharacterCard from '../CharacterCard';
+import useFilteredEntities from '../useFilteredEntities'
 
 const Characters = () => {
   const dispatch = useDispatch();
   const { characters, loading, error } = useSelector((state) => state.characters);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [speciesFilter, setSpeciesFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
@@ -20,26 +20,15 @@ const Characters = () => {
   const charactersPerPage = 8;
 
   useEffect(() => {
-    const applyFilters = () => {
-      const filtered = characters.filter((character) => {
-        const matchesName = nameFilter === '' || character.name.toLowerCase().includes(nameFilter);
-        const matchesSpecies = speciesFilter === '' || character.species === speciesFilter;
-        const matchesStatus = statusFilter === '' || character.status === statusFilter;
-        const matchesGender = genderFilter === '' || character.gender === genderFilter;
-        return matchesSpecies && matchesStatus && matchesGender && matchesName;
-      });
-      setFilteredCharacters(filtered);
-    };
-
-    applyFilters();
-  }, [characters, speciesFilter, statusFilter, genderFilter, nameFilter]);
-
-
-
-  useEffect(() => {
     dispatch(fetchCharacters());
   }, [dispatch]);
 
+  const filteredCharacters = useFilteredEntities(characters, [
+    { value: nameFilter, predicate: (character, value) => character.name.toLowerCase().includes(value.toLowerCase()) },
+    { value: speciesFilter, predicate: (character, value) => character.species === value },
+    { value: statusFilter, predicate: (character, value) => character.status === value },
+    { value: genderFilter, predicate: (character, value) => character.gender === value },
+  ]);
 
   const showCharacters = () => {
     setCurrentPage(currentPage + 1);
@@ -91,3 +80,4 @@ const Characters = () => {
 };
 
 export default Characters;
+

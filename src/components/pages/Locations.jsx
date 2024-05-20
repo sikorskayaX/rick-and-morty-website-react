@@ -6,12 +6,12 @@ import FilterSelect from '../filters/FilterSelect';
 import { PLANET_OPTIONS, DIMENSION_OPTIONS} from '../filters/filterOptions';
 import { Link } from "react-router-dom";
 import logoBig from '../images/rick-and-morty-1.png';
+import useFilteredEntities from '../useFilteredEntities'
 
 const Locations = () => {
   const dispatch = useDispatch();
   const { locations, loading, error } = useSelector((state) => state.locations);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredLocations, setFilteredLocations] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [dimensionFilter, setDimensionFilter] = useState('');
@@ -23,19 +23,11 @@ const Locations = () => {
   }, [dispatch]);
 
 
-  useEffect(() => {
-    const applyFilters = () => {
-      const filtered = locations.filter((location) => {
-        const matchesName = nameFilter === '' || location.name.toLowerCase().includes(nameFilter);
-        const matchesType = typeFilter === '' || location.type === typeFilter;
-        const matchesDimension = dimensionFilter === '' || location.dimension === dimensionFilter;
-        return matchesType && matchesDimension && matchesName;
-      });
-      setFilteredLocations(filtered);
-    };
-
-    applyFilters();
-  }, [locations, typeFilter, dimensionFilter, nameFilter]);
+  const filteredLocations = useFilteredEntities(locations, [
+    { value: nameFilter, predicate: (location, value) => location.name.toLowerCase().includes(value.toLowerCase()) },
+    { value: typeFilter, predicate: (location, value) => location.type === value },
+    { value: dimensionFilter, predicate: (location, value) => location.dimension === value },
+  ]);
 
   const showLocations = () => {
     setCurrentPage(currentPage + 1);
