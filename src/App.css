@@ -434,6 +434,9 @@ a:visited {
     .character__informations-title{
         margin-bottom: 1rem;
     }
+    .character__go-back{
+        display: none;
+    }
 }
 
 /*locations, episodes*/
