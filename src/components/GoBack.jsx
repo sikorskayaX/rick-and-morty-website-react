@@ -4,7 +4,6 @@ import { ArrowLeft } from './svg/ArrowLeft';
 
 const GoBack = () => {
   const navigate = useNavigate();
-
   const handleGoBack = () => {
     navigate(-1);
   };

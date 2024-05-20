@@ -192,7 +192,6 @@ a:visited {
     color: rgb(104, 206, 81);
 }
 
-
 @media only screen and (max-width: 360px){
     h1{
         font-size: 30px;

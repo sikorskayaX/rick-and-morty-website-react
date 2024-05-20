@@ -5,6 +5,7 @@ import { fetchEpisodes } from '../redux/episodesReducer';
 import { fetchLocations } from '../redux/locationsReducer';
 import { Link } from "react-router-dom";
 import GoBack from '../GoBack';
+import CharacterInformation from '../CharacterInformation';
 
 const CharacterElement = () => {
   const { characterId } = useParams();
@@ -18,16 +19,16 @@ const CharacterElement = () => {
 
   
   useEffect(() => {
-    if (character && character.episode) {
+    if (character?.episode) {
       dispatch(fetchEpisodes(character.episode));
     }
-  }, [dispatch]);
+  }, [dispatch, character?.episode]);
 
   useEffect(() => {
-    if (character) {
+    if (character?.location.url || character?.origin.url) {
       dispatch(fetchLocations([character.location.url, character.origin.url]));
     }
-  }, [dispatch, character]);
+  }, [dispatch, character?.location.url, character?.origin.url]);
 
 
   if (!character) {
@@ -44,35 +45,18 @@ const CharacterElement = () => {
           <h1>{character.name}</h1>
         </div>
         <div className='character__properties'>
+
           <div className='character__informations'>
             <h2 className='character__informations-title'>Informations</h2>
-            <div className='character__information'>
-              <p className='character__info-title'>Gender</p>
-              <p className='small'>{character.gender}</p>
-            </div>
-            <div className='character__information'>
-              <p className='character__info-title'>Status</p>
-              <p className='small'>{character.status}</p>
-            </div>
-            <div className='character__information'>
-              <p className='character__info-title'>Species</p>
-              <p className='small'>{character?.species || 'unknown'}</p>
-            </div>
-            <div className='character__information'>
-              <p className='character__info-title'>Type</p>
-              <p className='small'>{character?.type || 'unknown'}</p>
-            </div>
-            <Link to={locations[0] ? `/locations/${locations[0].id}` : '#!'}>
-              <div className='character__information-clickable'>
-                <p className='character__info-title'>Planet</p>
-                <p className='small'>{locations[0]?.name || 'unknown'}</p>
-              </div>
+            <CharacterInformation title = 'Gender' info = {character.gender}/>
+            <CharacterInformation title = 'Status' info = {character.status}/>
+            <CharacterInformation title = 'Species' info = {character.species}/>
+            <CharacterInformation title = 'Type' info = {character.type}/>
+            <Link to={locations[0] ? `/locations/${locations[0].id}` : '#'}>
+              <CharacterInformation title = 'Planet' info = {locations[0]?.name}className='character__information-clickable'/>
             </Link>
-            <Link to={locations[1] ? `/locations/${locations[1].id}` : '#!'}>
-              <div className='character__information-clickable'>
-                <p className='character__info-title'>Origin</p>
-                <p className='small'>{locations[1]?.name || 'unknown'}</p>
-              </div>
+            <Link to={locations[1] ? `/locations/${locations[1].id}` : '#'}>
+              <CharacterInformation title = 'Origin' info = {locations[1]?.name}className={'character__information-clickable'}/>
             </Link>
           </div>
           <div className='character__episodes'>

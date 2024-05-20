@@ -1,11 +1,12 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from '../redux/charactersReducer';
-import { Link } from "react-router-dom";
 import FilterInput from '../filters/FilterInput';
 import FilterSelect from '../filters/FilterSelect';
+import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '../filters/filterOptions';
 import LoadMore from '../LoadMore';
 import logoBig from '../images/logo-big.png';
+import CharacterCard from '../CharacterCard';
 
 const Characters = () => {
   const dispatch = useDispatch();
@@ -58,59 +59,28 @@ const Characters = () => {
       </header>
       <main className='main'>
         <div className='filters'>
-        <FilterInput className = "filters__name-character" onChange={setNameFilter} />
-        <FilterSelect
-        options={[
-          { value: '', label: 'Gender' },
-          { value: 'Male', label: 'Male' },
-          { value: 'Female', label: 'Female' },
-          { value: 'Genderless', label: 'Genderless' }
-        ]}
-        onSelect={setGenderFilter}
-        filterProperty="gender" 
-        />
-
-      <FilterSelect
-        options={[
-          { value: '', label: 'Species' },
-          { value: 'Human', label: 'Human' },
-          { value: 'Alien', label: 'Alien' },
-          { value: 'Mythological Creature', label: 'Mythological Creature' },
-          { value: 'Humanoid', label: 'Humanoid' },
-          { value: 'Poopybutthole', label: 'Poopybutthole' },
-          { value: 'Disease', label: 'Disease' },
-          { value: 'Robot', label: 'Robot' },
-          { value: 'Cronenberg', label: 'Cronenberg' },
-          { value: 'Animal', label: 'Animal' },
-          { value: 'unknown', label: 'unknown' }
-        ]}
-        onSelect={setSpeciesFilter}
-        filterProperty="species"
-      />
-
-      <FilterSelect
-        options={[
-          { value: '', label: 'Status' },
-          { value: 'Alive', label: 'Alive' },
-          { value: 'Dead', label: 'Dead' }, 
-          { value: 'unknown', label: 'Unknown' }
-        ]}
-        onSelect={setStatusFilter}
-        filterProperty="status"
-      />
-      </div>
-
-        <div className='characters'>
-          {currentCharacters.map((character) => (
-            <div className='characters__container' key={character.id}>
-            <Link to={`/characters/${character.id}`}>
-              <img className="characters__image" src={character.image} alt={character.name} />
-              <h6 className="characters__name">{character.name}</h6>
-              <p className='characters__species regular'>{character.species}</p>
-            </Link>
-            </div>
-          ))}
+          <FilterInput className = "filters__name-character" onChange={setNameFilter} />
+          <FilterSelect
+            options={GENDER_OPTIONS}
+            onSelect={setGenderFilter}
+            filterProperty="gender" 
+            />
+          <FilterSelect
+            options={SPECIES_OPTIONS}
+            onSelect={setSpeciesFilter}
+            filterProperty="species"
+          />
+          <FilterSelect
+            options={STATUS_OPTIONS}
+            onSelect={setStatusFilter}
+            filterProperty="status"
+          />
         </div>
+      <div className='characters'>
+        {currentCharacters.map((character) => (
+          <CharacterCard key={character.id} character={character} />
+        ))}
+      </div>
         <LoadMore 
           onClick={showCharacters} 
           isVisible={indexOfLastCharacter < filteredCharacters.length} 

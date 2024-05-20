@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchLocations, resetLocations } from '../redux/locationsReducer';
 import FilterInput from '../filters/FilterInput';
 import FilterSelect from '../filters/FilterSelect';
+import { PLANET_OPTIONS, DIMENSION_OPTIONS} from '../filters/filterOptions';
 import { Link } from "react-router-dom";
 import logoBig from '../images/rick-and-morty-1.png';
 
@@ -56,30 +57,12 @@ const Locations = () => {
           <div className='filters'>
           <FilterInput className="filters__name-location" onChange={setNameFilter}/>
       <FilterSelect
-        options={[
-          { value: '', label: 'Type' },
-          { value: 'Planet', label: 'Planet' },
-          { value: 'Space station', label: 'Space station' },
-          { value: 'TV', label: 'TV' },
-          { value: 'Resort', label: 'Resort' },
-          { value: 'Dream', label: 'Dream' },
-          { value: 'Microverse', label: 'Microverse' },
-          { value: 'Fantasy town', label: 'Fantasy town' },
-          { value: 'Game', label: 'Game' },
-          { value: 'Menagerie', label: 'Menagerie' },
-        ]}
+        options={PLANET_OPTIONS}
         onSelect={setTypeFilter}
         filterProperty="type" // This is the property of the location to filter on
       />
       <FilterSelect
-        options={[
-          { value: '', label: 'Dimension' },
-          { value: 'Replacement Dimension', label: 'Replacement Dimension' },
-          { value: 'Post-Apocalyptic Dimension', label: 'Post-Apocalyptic Dimension' },
-          { value: 'Cronenberg Dimension', label: 'Cronenberg Dimension' },
-          { value: 'Chair Dimension', label: 'Chair Dimension' },
-          { value: 'Cromulon Dimension', label: 'Cromulon Dimension' },
-        ]}
+        options={DIMENSION_OPTIONS}
         onSelect={setDimensionFilter}
         filterProperty="dimension" // This is the property of the location to filter on
       />          
