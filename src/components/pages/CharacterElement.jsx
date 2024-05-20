@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEpisodes } from '../redux/episodesReducer';
 import { fetchLocations } from '../redux/locationsReducer';
 import { Link } from "react-router-dom";
-import GoBack from '../GoBack';
-import CharacterInformation from '../CharacterInformation';
+import GoBack from '../clickable-elements/GoBack';
+import CharacterInformation from '../cards/CharacterInformation';
 
 const CharacterElement = () => {
   const { characterId } = useParams();

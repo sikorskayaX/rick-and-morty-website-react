@@ -4,9 +4,9 @@ import { fetchCharacters } from '../redux/charactersReducer';
 import FilterInput from '../filters/FilterInput';
 import FilterSelect from '../filters/FilterSelect';
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '../filters/filterOptions';
-import LoadMore from '../LoadMore';
+import LoadMore from '../clickable-elements/LoadMore';
 import logoBig from '../images/logo-big.png';
-import CharacterCard from '../CharacterCard';
+import CharacterCard from '../cards/CharacterCard';
 
 const Characters = () => {
   const dispatch = useDispatch();

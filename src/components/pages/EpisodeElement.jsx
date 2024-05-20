@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import GoBack from '../GoBack';
-import CharactersList from '../CharactersList';
+import GoBack from '../clickable-elements/GoBack';
+import CharactersList from '../cards/CharactersList';
 
 const EpisodeElement = () => {
   const { episodeId } = useParams();

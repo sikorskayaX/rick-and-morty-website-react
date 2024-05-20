@@ -2,8 +2,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEpisodes } from '../redux/episodesReducer';
 import FilterInput from '../filters/FilterInput';
-import { Link } from "react-router-dom";
 import logoBig from '../images/rick-and-morty-2.png';
+import EpisodeCard from '../cards/EpisodeCard';
 
 const Episodes = () => {
   const dispatch = useDispatch();
@@ -57,15 +57,9 @@ const Episodes = () => {
         </div>
         <div className='episodes'>
           {currentEpisodes.map((episode) => (
-            <div className='episodes__container'  key={episode.id}>
-              <Link to={`/episodes/${episode.id}`}>
-                  <h6>{episode.name}</h6>
-                  <p className="regular">{episode.air_date}</p>
-                  <p className="bold">{episode.episode}</p>
-              </Link>
-              </div>
-          ))}
-        </div>
+            <EpisodeCard key={episode.id} episode={episode} />
+        ))}
+      </div>
         {indexOfLastEpisode < filteredEpisodes.length && (
           <button onClick={showEpisodes}>Load More</button>
         )}

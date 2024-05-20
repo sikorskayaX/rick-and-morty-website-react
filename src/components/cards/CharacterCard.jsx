@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 //  skip re-rendering
-const CharacterCard = React.memo(({ character }) => {
+const CharacterCard = ({ character }) => {
   return (
     <div className='characters__container'>
       <Link to={`/characters/${character.id}`}>
@@ -12,6 +12,6 @@ const CharacterCard = React.memo(({ character }) => {
       </Link>
     </div>
   );
-});
+};
 
-export default CharacterCard;
+export default React.memo(CharacterCard);

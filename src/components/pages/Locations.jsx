@@ -4,8 +4,8 @@ import { fetchLocations, resetLocations } from '../redux/locationsReducer';
 import FilterInput from '../filters/FilterInput';
 import FilterSelect from '../filters/FilterSelect';
 import { PLANET_OPTIONS, DIMENSION_OPTIONS} from '../filters/filterOptions';
-import { Link } from "react-router-dom";
 import logoBig from '../images/rick-and-morty-1.png';
+import LocationCard from '../cards/LocationCard';
 
 const Locations = () => {
   const dispatch = useDispatch();
@@ -69,12 +69,7 @@ const Locations = () => {
         </div>
         <div className='locations'>
           {currentLocations.map((location) => (
-              <div className='locations__container'  key={location.id}>
-                  <Link to={`/locations/${location.id}`}>
-                  <h6 className="locations__name">{location.name}</h6>
-                  <p className="regular">{location.type}</p>
-                  </Link>
-              </div>
+            <LocationCard key={location.id} location={location} />
           ))}
         </div>
         {indexOfLastLocation < filteredLocations.length && (
