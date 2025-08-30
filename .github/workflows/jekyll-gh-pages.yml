@@ -43,7 +43,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build # Укажите путь к папке, где находятся сгенерированные файлы
+          path: "./build"
 
   # Deployment job
   deploy:
