@@ -1,9 +1,9 @@
-﻿import{ useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchEpisodes } from './episodesReducer';
-import FilterInput from './filters/FilterInput';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEpisodes } from "./episodesReducer";
+import FilterInput from "./filters/FilterInput";
 import { Link } from "react-router-dom";
-import logoBig from './images/rick-and-morty-2.png';
+import logoBig from "./images/rick-and-morty-2.png";
 
 const Episodes = () => {
   const dispatch = useDispatch();
@@ -33,22 +33,22 @@ const Episodes = () => {
 
   return (
     <body>
-      <header className='header'>
-        <img src= {logoBig} alt="logo" className="header__logo"/>
+      <header className="header">
+        <img src={logoBig} alt="logo" className="header__logo" />
       </header>
       <main>
-        <div className='filters'>
+        <div className="filters">
           <FilterInput
             className="filters__name-episode"
             items={episodes}
             onChange={setFilteredEpisodes}
-            placeholder = 'Filter by name or episode (ex. S01 or S01E02)'
+            placeholder="Filter by name or episode (ex. S01 or S01E02)"
           />
         </div>
-        <div className='episodes'>
+        <div className="episodes">
           {currentEpisodes.map((episode) => (
             <Link to={`/episodes/${episode.id}`}>
-            <div className='episodes__container'  key={episode.id}>
+              <div className="episodes__container" key={episode.id}>
                 <div>
                   <h6>{episode.name}</h6>
                   <p className="regular">{episode.air_date}</p>

@@ -1,4 +1,4 @@
-﻿export const ArrowLeft = () => {
+export const ArrowLeft = () => {
   return (
     <svg
       width="24"

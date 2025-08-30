@@ -1,10 +1,10 @@
-﻿import{ useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchLocations, resetLocations } from './locationsReducer';
-import FilterInput from './filters/FilterInput';
-import FilterSelect from './filters/FilterSelect';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLocations, resetLocations } from "./locationsReducer";
+import FilterInput from "./filters/FilterInput";
+import FilterSelect from "./filters/FilterSelect";
 import { Link } from "react-router-dom";
-import logoBig from './images/rick-and-morty-1.png';
+import logoBig from "./images/rick-and-morty-1.png";
 
 const Locations = () => {
   const dispatch = useDispatch();
@@ -17,8 +17,6 @@ const Locations = () => {
     dispatch(resetLocations());
     dispatch(fetchLocations());
   }, [dispatch]);
-
-
 
   useEffect(() => {
     setFilteredLocations(locations);
@@ -37,42 +35,45 @@ const Locations = () => {
 
   return (
     <body>
-      <header className='header'>
-        <img src= {logoBig} alt="logo" className="header__logo"/>
+      <header className="header">
+        <img src={logoBig} alt="logo" className="header__logo" />
       </header>
       <main>
-          <div className='filters'>
+        <div className="filters">
           <FilterInput
             className="filters__name-location"
             items={locations}
             onChange={setFilteredLocations}
           />
-      <FilterSelect
-        options={[
-          { value: '', label: 'Type' },
-          { value: 'Planet', label: 'Planet' },
-          { value: 'Space station', label: 'Space station' }
-        ]}
-        characters={locations}
-        onSelect={setFilteredLocations}
-        filterProperty="type" // This is the property of the character to filter on
-      />
-      <FilterSelect
-        options={[
-          { value: '', label: 'Dimension' },
-          { value: 'Post-Apocalyptic Dimension', label: 'Post-Apocalyptic Dimension' },
-          { value: 'Cronenberg Dimension', label: 'Cronenberg Dimension' },
-          { value: 'Chair Dimension', label: 'Chair Dimension' }
-        ]}
-        characters={locations}
-        onSelect={setFilteredLocations}
-        filterProperty="dimension" // This is the property of the character to filter on
-      />          
+          <FilterSelect
+            options={[
+              { value: "", label: "Type" },
+              { value: "Planet", label: "Planet" },
+              { value: "Space station", label: "Space station" },
+            ]}
+            characters={locations}
+            onSelect={setFilteredLocations}
+            filterProperty="type" // This is the property of the character to filter on
+          />
+          <FilterSelect
+            options={[
+              { value: "", label: "Dimension" },
+              {
+                value: "Post-Apocalyptic Dimension",
+                label: "Post-Apocalyptic Dimension",
+              },
+              { value: "Cronenberg Dimension", label: "Cronenberg Dimension" },
+              { value: "Chair Dimension", label: "Chair Dimension" },
+            ]}
+            characters={locations}
+            onSelect={setFilteredLocations}
+            filterProperty="dimension" // This is the property of the character to filter on
+          />
         </div>
-        <div className='locations'>
+        <div className="locations">
           {currentLocations.map((location) => (
             <Link to={`/locations/${location.id}`}>
-              <div className='locations__container'  key={location.id}>
+              <div className="locations__container" key={location.id}>
                 <div>
                   <h6 className="locations__name">{location.name}</h6>
                   <p className="regular">{location.type}</p>

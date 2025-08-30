@@ -1,4 +1,4 @@
-﻿const LoadMore = ({ onClick, isVisible }) => {
+const LoadMore = ({ onClick, isVisible }) => {
   if (!isVisible) return null;
 
   return (

@@ -1,15 +1,21 @@
-﻿import axios from 'axios';
+import axios from "axios";
 
 // Action Types
-const FETCH_EPISODES_START = 'FETCH_EPISODES_START';
-const FETCH_EPISODES_SUCCESS = 'FETCH_EPISODES_SUCCESS';
-const FETCH_EPISODES_FAIL = 'FETCH_EPISODES_FAIL';
-const SET_PAGE = 'SET_PAGE';
+const FETCH_EPISODES_START = "FETCH_EPISODES_START";
+const FETCH_EPISODES_SUCCESS = "FETCH_EPISODES_SUCCESS";
+const FETCH_EPISODES_FAIL = "FETCH_EPISODES_FAIL";
+const SET_PAGE = "SET_PAGE";
 
 // Action Creators
 export const fetchEpisodesStart = () => ({ type: FETCH_EPISODES_START });
-export const fetchEpisodesSuccess = (episodes) => ({ type: FETCH_EPISODES_SUCCESS, payload: episodes });
-export const fetchEpisodesFail = (error) => ({ type: FETCH_EPISODES_FAIL, payload: error });
+export const fetchEpisodesSuccess = (episodes) => ({
+  type: FETCH_EPISODES_SUCCESS,
+  payload: episodes,
+});
+export const fetchEpisodesFail = (error) => ({
+  type: FETCH_EPISODES_FAIL,
+  payload: error,
+});
 export const setPage = (page) => ({ type: SET_PAGE, payload: page });
 
 // Thunk для загрузки всех персонажей
@@ -19,10 +25,12 @@ export const fetchEpisodes = (episodeURLs = []) => {
     try {
       let allEpisodes = [];
       if (episodeURLs.length > 0) {
-        const responses = await Promise.all(episodeURLs.map((url) => axios.get(url)));
+        const responses = await Promise.all(
+          episodeURLs.map((url) => axios.get(url))
+        );
         allEpisodes = responses.map((response) => response.data);
       } else {
-        let nextPage = 'https://rickandmortyapi.com/api/episode/';
+        let nextPage = "https://rickandmortyapi.com/api/episode/";
         while (nextPage) {
           const response = await axios.get(nextPage);
           allEpisodes = allEpisodes.concat(response.data.results);
@@ -35,7 +43,6 @@ export const fetchEpisodes = (episodeURLs = []) => {
     }
   };
 };
-
 
 // Initial State
 const initialState = {

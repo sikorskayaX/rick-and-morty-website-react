@@ -1,7 +1,13 @@
-﻿import { useState } from 'react';
+import { useState } from "react";
 
-const FilterInput = ({ className, items, onChange, placeholder = 'Filter by name...', filterProperty = 'name' }) => {
-  const [filter, setFilter] = useState('');
+const FilterInput = ({
+  className,
+  items,
+  onChange,
+  placeholder = "Filter by name...",
+  filterProperty = "name",
+}) => {
+  const [filter, setFilter] = useState("");
 
   const handleFilterChange = (event) => {
     const value = event.target.value.toLowerCase();

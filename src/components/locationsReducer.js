@@ -1,4 +1,4 @@
-﻿import axios from "axios";
+import axios from "axios";
 
 // Action Types
 const FETCH_LOCATIONS_START = "FETCH_LOCATIONS_START";

@@ -1,23 +1,23 @@
-﻿import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharacters } from './charactersReducer';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCharacters } from "./charactersReducer";
 import { Link } from "react-router-dom";
 
 const CharactersList = ({ characterURLs = [] }) => {
   const dispatch = useDispatch();
-  const { characters, loading, error } = useSelector((state) => state.characters);
+  const { characters, loading, error } = useSelector(
+    (state) => state.characters
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const charactersPerPage = 8;
 
   useEffect(() => {
-    if(characterURLs.length > 0){
-        dispatch(fetchCharacters(characterURLs));
+    if (characterURLs.length > 0) {
+      dispatch(fetchCharacters(characterURLs));
+    } else {
+      dispatch(fetchCharacters());
     }
-    else{
-        dispatch(fetchCharacters());
-    }
-  }, [dispatch]);
-
+  }, [dispatch, characterURLs]);
 
   const showCharacters = () => {
     setCurrentPage(currentPage + 1);
@@ -30,13 +30,17 @@ const CharactersList = ({ characterURLs = [] }) => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className='characters'>
+    <div className="characters">
       {currentCharacters.map((character) => (
-        <div className='characters__container' key={character.id}>
+        <div className="characters__container" key={character.id}>
           <Link to={`/characters/${character.id}`}>
-            <img className="characters__image" src={character.image} alt={character.name} />
+            <img
+              className="characters__image"
+              src={character.image}
+              alt={character.name}
+            />
             <h6 className="characters__name">{character.name}</h6>
-            <p className='characters__species regular'>{character.species}</p>
+            <p className="characters__species regular">{character.species}</p>
           </Link>
         </div>
       ))}
@@ -47,6 +51,4 @@ const CharactersList = ({ characterURLs = [] }) => {
   );
 };
 
-
 export default CharactersList;
-

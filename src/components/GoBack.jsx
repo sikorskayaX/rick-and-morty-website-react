@@ -1,6 +1,5 @@
-﻿
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from './svg/ArrowLeft';
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "./svg/ArrowLeft";
 
 const GoBack = () => {
   const navigate = useNavigate();
@@ -11,12 +10,10 @@ const GoBack = () => {
 
   return (
     <div className="character__go-back" onClick={handleGoBack}>
-      <ArrowLeft/>
+      <ArrowLeft />
       <h3>GO BACK</h3>
     </div>
   );
 };
 
 export default GoBack;
-
-

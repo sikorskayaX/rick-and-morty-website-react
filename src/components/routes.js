@@ -1,4 +1,4 @@
-﻿import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Characters from "./Characters";
 import Locations from "./Locations";
 import Episodes from "./Episodes";
