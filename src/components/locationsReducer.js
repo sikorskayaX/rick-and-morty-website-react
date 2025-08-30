@@ -1,16 +1,22 @@
-﻿import axios from 'axios';
+﻿import axios from "axios";
 
 // Action Types
-const FETCH_LOCATIONS_START = 'FETCH_LOCATIONS_START';
-const FETCH_LOCATIONS_SUCCESS = 'FETCH_LOCATIONS_SUCCESS';
-const FETCH_LOCATIONS_FAIL = 'FETCH_LOCATIONS_FAIL';
-const SET_PAGE = 'SET_PAGE';
-const RESET_LOCATIONS = 'RESET_LOCATIONS';
+const FETCH_LOCATIONS_START = "FETCH_LOCATIONS_START";
+const FETCH_LOCATIONS_SUCCESS = "FETCH_LOCATIONS_SUCCESS";
+const FETCH_LOCATIONS_FAIL = "FETCH_LOCATIONS_FAIL";
+const SET_PAGE = "SET_PAGE";
+const RESET_LOCATIONS = "RESET_LOCATIONS";
 
 // Action Creators
 export const fetchLocationsStart = () => ({ type: FETCH_LOCATIONS_START });
-export const fetchLocationsSuccess = (locations) => ({ type: FETCH_LOCATIONS_SUCCESS, payload: locations });
-export const fetchLocationsFail = (error) => ({ type: FETCH_LOCATIONS_FAIL, payload: error });
+export const fetchLocationsSuccess = (locations) => ({
+  type: FETCH_LOCATIONS_SUCCESS,
+  payload: locations,
+});
+export const fetchLocationsFail = (error) => ({
+  type: FETCH_LOCATIONS_FAIL,
+  payload: error,
+});
 export const setPage = (page) => ({ type: SET_PAGE, payload: page });
 export const resetLocations = () => ({ type: RESET_LOCATIONS });
 
@@ -21,12 +27,13 @@ export const fetchLocations = (URLs = []) => {
     try {
       let allLocations = [];
       const locationURLs = URLs.filter(Boolean);
-      if(locationURLs.length > 0) {
-        const responses = await Promise.all(locationURLs.map((url) => (url ? axios.get(url) : 'unknown')));
+      if (locationURLs.length > 0) {
+        const responses = await Promise.all(
+          locationURLs.map((url) => (url ? axios.get(url) : "unknown"))
+        );
         allLocations = responses.map((response) => response.data);
-      } 
-      else {
-        let nextPage = 'https://rickandmortyapi.com/api/location/';
+      } else {
+        let nextPage = "https://rickandmortyapi.com/api/location/";
         while (nextPage) {
           const response = await axios.get(nextPage);
           allLocations = allLocations.concat(response.data.results);
@@ -39,7 +46,6 @@ export const fetchLocations = (URLs = []) => {
     }
   };
 };
-
 
 // Initial State
 const initialState = {
@@ -61,7 +67,7 @@ const locationsReducer = (state = initialState, action) => {
     case SET_PAGE:
       return { ...state, page: action.payload };
     case RESET_LOCATIONS:
-        return {...state, locations: [], loading: false, error: null,};
+      return { ...state, locations: [], loading: false, error: null };
     default:
       return state;
   }

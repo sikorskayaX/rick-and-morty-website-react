@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import { useState } from 'react';
 
 const FilterInput = ({ className, items, onChange, placeholder = 'Filter by name...', filterProperty = 'name' }) => {
   const [filter, setFilter] = useState('');

@@ -1,13 +1,11 @@
-﻿import React from 'react';
+﻿const LoadMore = ({ onClick, isVisible }) => {
+  if (!isVisible) return null;
 
-const LoadMore = ({ onClick, isVisible }) => {
-    if (!isVisible) return null;
-  
-    return (
-      <div className="medium">
-        <button onClick={onClick}>Load More</button>
-      </div>
-    );
-  };
+  return (
+    <div className="medium">
+      <button onClick={onClick}>Load More</button>
+    </div>
+  );
+};
 
 export default LoadMore;
