@@ -1,6 +1,7 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "homepage": "https://sikorskayax.github.io/rick-and-morty-website-react",
+  "name": "rick-and-morty-website-react",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.4",
@@ -8,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "gh-pages": "^6.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
@@ -19,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
